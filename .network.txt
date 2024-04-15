@@ -1,0 +1,236 @@
+Task 1 (5 points): Data types and control structures
+Define an int variable called "age" and initialize it with your age.Define a string variable named
+ "name" and initialize it with your name. 
+Write a loop that iterates from 1 to 10 and inside the loop print a message containing 
+your name and the index of the current loop.
+---
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int age = 30; // Replace 30 with your actual age
+        string name = "John"; // Replace "John" with your actual name
+
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine($"Hello, my name is {name} and the current loop index is: {i}");
+        }
+    }
+}
+Assignment 2 (5 points): Classes and methods
+Create a class named "Person" with the following properties:
+ private integer field "age". 
+Public string property "Name" get and set with accessories. 
+A constructor that takes two parameters to initialize age and name. Create a public method called "Introduction" that returns the message:
+ "Hi, I'm [Name] and I'm [age] years old". 
+Create an object of the "Person" class, assign it a name and age, and call the "Introduction" method.
+---
+using System;
+
+// Define the Person class
+public class Person
+{
+    private int age; // private integer field "age"
+    
+    public string Name { get; set; } // Public string property "Name" with get and set accessors
+
+    // Constructor to initialize age and name
+    public Person(int age, string name)
+    {
+        this.age = age;
+        Name = name;
+    }
+
+    // Public method for Introduction
+    public string Introduction()
+    {
+        return $"Hi, I'm {Name} and I'm {age} years old";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create an object of the Person class
+        Person person = new Person(25, "John");
+
+        // Call the Introduction method
+        string message = person.Introduction();
+        
+        // Output the message
+        Console.WriteLine(message);
+    }
+}
+---
+Task 3 (5 points): inheritance and method reset
+Create a class called "Shape" with the following: protected double product "Area." 
+A constructor that initializes "Area" and assigns 0. Create an affiliate class called "Rectangle" that inherits "Shape" with the following:
+ two private double field "_length" and "_width." And products corresponding to their name. 
+Restart (Method Overloading) the "CalculateArea()" method in the "Rectangle" class, which takes the parameters of length and width and calculates the area accordingly.
+ Create an affiliate class called "Circle" which also inherits "Shape" with the following: private double field "_radius and name-appropriate property."
+ Reset the "CalculateArea()" method to the "Circle" class version, which takes the radius parameter and calculates the area accordingly.
+Create objects of "Rectangle" and "Circle" classes in different dimensions (length, width or radius).
+ Calculate and print the areas of both rectangles and circles using the overloaded "CalculateArea()" methods.
+---
+using System;
+
+public class Shape
+{
+    protected double area;
+
+    public Shape()
+    {
+        area = 0;
+    }
+
+    public virtual void CalculateArea()
+    {
+        Console.WriteLine("Area: " + area);
+    }
+}
+
+public class Rectangle : Shape
+{
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width)
+    {
+        this.length = length;
+        this.width = width;
+    }
+
+    public override void CalculateArea()
+    {
+        area = length * width;
+        Console.WriteLine("Rectangle Area: " + area);
+    }
+}
+
+public class Circle : Shape
+{
+    private double radius;
+
+    public Circle(double radius)
+    {
+        this.radius = radius;
+    }
+
+    public override void CalculateArea()
+    {
+        area = Math.PI * radius * radius;
+        Console.WriteLine("Circle Area: " + area);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Rectangle rectangle = new Rectangle(5, 10);
+        rectangle.CalculateArea();
+
+        Circle circle = new Circle(3);
+        circle.CalculateArea();
+    }
+}
+---
+Task 4 (5 points): abstract classes and interfaces Create an abstract class "Vehicle" with the following members: 
+Abstract method "StartEngine()" without implementation. Create a successor class to the "Vehicle" class "Car“",
+ which ensures the implementation of "StartEngine()" by returning to „Car engine started. Create a class "Bicycle",
+ which is also a subsidiary of "Vehicle", and implements "StartEngine()" and returns the result to „Pedaling the bicycle“.
+ Create objects of "Car" and "Bicycle" classes and call their "StartEngine()" method. 
+---
+using System;
+
+// Abstract class Vehicle
+public abstract class Vehicle
+{
+    // Abstract method StartEngine without implementation
+    public abstract void StartEngine();
+}
+
+// Car class inheriting from Vehicle
+public class Car : Vehicle
+{
+    // Implementing StartEngine method for Car
+    public override void StartEngine()
+    {
+        Console.WriteLine("Car engine started.");
+    }
+}
+
+// Bicycle class inheriting from Vehicle
+public class Bicycle : Vehicle
+{
+    // Implementing StartEngine method for Bicycle
+    public override void StartEngine()
+    {
+        Console.WriteLine("Pedaling the bicycle.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create an object of Car class and call StartEngine method
+        Car car = new Car();
+        car.StartEngine();
+
+        // Create an object of Bicycle class and call StartEngine method
+        Bicycle bicycle = new Bicycle();
+        bicycle.StartEngine();
+    }
+}
+---
+Task 5 (5 points): Generics and General Generic List
+Create a generic class "MyList<T>". 
+It should include the following methods:
+ the "Add" method, which adds a T-type element to the List.
+The "Get" method, which returns an element from the List according to the index transmitted.
+Create a "MyList" object for integers (int type) and add some items to the list.
+ Use the "Get" method to remove and print an item from the list based on the index given.
+---
+using System;
+using System.Collections.Generic;
+
+class MyList<T>
+{
+    private List<T> items = new List<T>();
+
+    public void Add(T item)
+    {
+        items.Add(item);
+    }
+
+    public T Get(int index)
+    {
+        if (index >= 0 && index < items.Count)
+        {
+            return items[index];
+        }
+        throw new IndexOutOfRangeException("Index out of range");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        MyList<int> intList = new MyList<int>();
+
+        intList.Add(10);
+        intList.Add(20);
+        intList.Add(30);
+
+        int indexToRemove = 1; // Index of the item to remove and print
+        int removedItem = intList.Get(indexToRemove); // Get and store the removed item
+
+        Console.WriteLine("Item removed from index {0}: {1}", indexToRemove, removedItem);
+    }
+}
+---
