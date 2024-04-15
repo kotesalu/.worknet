@@ -1,0 +1,226 @@
+Task 1 (5 points): Data types and control structures
+Define an int variable called "quantity" and initialize it (eg, 7). 
+Define a string variable called "itemName" and initialize it by any product name (eg, "Widget"). 
+Write a cycle that iterations from 1 to 5 inclusive and print a message inside the
+ cycle that contains the product name and the current cycle index.
+---
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int quantity = 7;
+        string itemName = "Widget";
+
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine("Item: " + itemName + " - Quantity: " + quantity + " - Cycle Index: " + i);
+        }
+    }
+}
+---
+Task 2 (5 points): classes and methods
+Create a class called "Employee" with the following features:
+ private integer field "_employeeName". Public string product "Salary" with get and set accessories.
+ A constructor that takes two parameters for initializing name and salary.
+ Create a public method called "DisplayInfo" that returns the message: "Hi, I'm [_employeeName] and I earn [Salary] per year". 
+Create an "Employee" class facility with name and salary and call the "DisplayInfo" method.
+---
+using System;
+
+public class Employee
+{
+    private int _employeeName;
+    public string Salary { get; set; }
+
+    public Employee(int employeeName, string salary)
+    {
+        _employeeName = employeeName;
+        Salary = salary;
+    }
+
+    public string DisplayInfo()
+    {
+        return $"Hi, I'm {_employeeName} and I earn {Salary} per year";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee emp = new Employee(123, "$50,000");
+        Console.WriteLine(emp.DisplayInfo());
+    }
+}
+---
+Task 3 (5 points): inheritance and method reset
+Create a class called "Item" with the following: protected double product "Price". 
+A constructor that initializes "Price" and assigns 0. Create an affiliate class of “Item called "Fruit" with the following:
+ two private field "_weightInKg" and "_priceOfOneKg" and their name-appropriate products. 
+Restart (Method Overloading) the "CalculateTotalPrice()" method in the class "Fruit" version,
+ which takes the parameters of the weight and the price of one kilogram ("_priceOfOneKg") and calculates the final price accordingly.
+ Create an affiliate class called "Electronics" which also inherits “Item" with the following: private int field "_quantity” and private double field "_oneUnitPrice” their respective property. 
+Reset the "CalculateTotalPrice()" method to the "Electronics" class version, which takes the unit price and quantity parameter and calculates the final price accordingly. 
+Create objects of the "Fruit" and "Electronics" classes, calculate and print the total prices of both fruits and electronic items using the overloaded "CalculateTotalPrice()" methods.
+---
+using System;
+
+// Base class Item
+public class Item
+{
+    protected double Price;
+
+    public Item()
+    {
+        Price = 0;
+    }
+}
+
+// Derived class Fruit
+public class Fruit : Item
+{
+    private double _weightInKg;
+    private double _priceOfOneKg;
+
+    public Fruit(double weightInKg, double priceOfOneKg)
+    {
+        _weightInKg = weightInKg;
+        _priceOfOneKg = priceOfOneKg;
+    }
+
+    public double CalculateTotalPrice(double weight, double pricePerKg)
+    {
+        return weight * pricePerKg;
+    }
+}
+
+// Derived class Electronics
+public class Electronics : Item
+{
+    private int _quantity;
+    private double _oneUnitPrice;
+
+    public Electronics(int quantity, double oneUnitPrice)
+    {
+        _quantity = quantity;
+        _oneUnitPrice = oneUnitPrice;
+    }
+
+    public double CalculateTotalPrice(int quantity, double oneUnitPrice)
+    {
+        return quantity * oneUnitPrice;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Fruit apple = new Fruit(2, 3.5);
+        double fruitTotalPrice = apple.CalculateTotalPrice(apple._weightInKg, apple._priceOfOneKg);
+        Console.WriteLine($"Total price of the fruit: {fruitTotalPrice}");
+
+        Electronics laptop = new Electronics(1, 800);
+        double electronicsTotalPrice = laptop.CalculateTotalPrice(laptop._quantity, laptop._oneUnitPrice);
+        Console.WriteLine($"Total price of the electronics: {electronicsTotalPrice}");
+    }
+}
+---
+Task 4 (5 points): abstract classes and interfaces
+Create an abstract class "Bird" with the following members: Abstract method "MakeSound()" without implementation. 
+Create a "Bird" class successor class "Sparrow", which provides the implementation of "MakeSound()" in the text: "Chirp." 
+By returning. Create a class "Pigeon", which is also an affiliate of "Bird", and integrates "MakeSound()" and returns the result to "Coo". 
+Create objects in the "Sparrow" and "Pigeon" classes and call their "MakeSound()" method.
+---
+using System;
+
+// Define an abstract class Bird
+public abstract class Bird
+{
+    public abstract void MakeSound();
+}
+
+// Sparrow class inheriting from Bird
+public class Sparrow : Bird
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Chirp.");
+    }
+}
+
+// Pigeon class inheriting from Bird
+public class Pigeon : Bird
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Coo.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create objects of Sparrow and Pigeon classes
+        Sparrow sparrow = new Sparrow();
+        Pigeon pigeon = new Pigeon();
+
+        // Call MakeSound method of Sparrow and Pigeon
+        sparrow.MakeSound();
+        pigeon.MakeSound();
+    }
+}
+---
+Task 5 (5 points): Generics and General Generic List
+Create a generic class "MyCollection<T>".
+ It should include the following methods:
+ the "AddItem" method, which adds a T-type element to the List. 
+The "GetItem" method, which returns an element based on the index transmitted from List.
+ Create a "MyCollection" object with string-type generic and add some items to the list.
+ Use the "GetItem" method to remove and print an item from the list based on the index given.
+---
+using System;
+
+// Define an abstract class Bird
+public abstract class Bird
+{
+    public abstract void MakeSound();
+}
+
+// Sparrow class inheriting from Bird
+public class Sparrow : Bird
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Chirp.");
+    }
+}
+
+// Pigeon class inheriting from Bird
+public class Pigeon : Bird
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Coo.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create objects of Sparrow and Pigeon classes
+        Sparrow sparrow = new Sparrow();
+        Pigeon pigeon = new Pigeon();
+
+        // Call MakeSound method of Sparrow and Pigeon
+        sparrow.MakeSound();
+        pigeon.MakeSound();
+    }
+}
+---
+
+
