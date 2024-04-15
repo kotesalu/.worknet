@@ -67,7 +67,6 @@ Create objects of the "Fruit" and "Electronics" classes, calculate and print the
 ---
 using System;
 
-// Base class Item
 public class Item
 {
     protected double Price;
@@ -78,7 +77,6 @@ public class Item
     }
 }
 
-// Derived class Fruit
 public class Fruit : Item
 {
     private double _weightInKg;
@@ -90,13 +88,13 @@ public class Fruit : Item
         _priceOfOneKg = priceOfOneKg;
     }
 
-    public double CalculateTotalPrice(double weight, double pricePerKg)
+    // Method to calculate the total price of fruit
+    public double CalculateTotalPrice()
     {
-        return weight * pricePerKg;
+        return _weightInKg * _priceOfOneKg;
     }
 }
 
-// Derived class Electronics
 public class Electronics : Item
 {
     private int _quantity;
@@ -108,9 +106,10 @@ public class Electronics : Item
         _oneUnitPrice = oneUnitPrice;
     }
 
-    public double CalculateTotalPrice(int quantity, double oneUnitPrice)
+    // Method to calculate the total price of electronics
+    public double CalculateTotalPrice()
     {
-        return quantity * oneUnitPrice;
+        return _quantity * _oneUnitPrice;
     }
 }
 
@@ -119,14 +118,15 @@ class Program
     static void Main()
     {
         Fruit apple = new Fruit(2, 3.5);
-        double fruitTotalPrice = apple.CalculateTotalPrice(apple._weightInKg, apple._priceOfOneKg);
+        double fruitTotalPrice = apple.CalculateTotalPrice();
         Console.WriteLine($"Total price of the fruit: {fruitTotalPrice}");
 
         Electronics laptop = new Electronics(1, 800);
-        double electronicsTotalPrice = laptop.CalculateTotalPrice(laptop._quantity, laptop._oneUnitPrice);
+        double electronicsTotalPrice = laptop.CalculateTotalPrice();
         Console.WriteLine($"Total price of the electronics: {electronicsTotalPrice}");
     }
 }
+
 ---
 Task 4 (5 points): abstract classes and interfaces
 Create an abstract class "Bird" with the following members: Abstract method "MakeSound()" without implementation. 
