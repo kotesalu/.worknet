@@ -1,0 +1,206 @@
+Task 1 (5 points): Data types and control structures
+Define an int variable called "temperature" and initialize it (eg, 22). 
+Define a string variable called "city" and initialize it with your city name. 
+Write a cycle that does iteration from 1 to 7 inclusive and print a message inside the cycle that includes the city, 
+current cycle index and temperature in Fahrenheit. (Fahrenheit = (Celsius * 9/5) + 32. ).
+---
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int temperature = 22;
+        string city = "YourCity";
+
+        for (int i = 1; i <= 7; i++)
+        {
+            double fahrenheit = (temperature * 9 / 5) + 32;
+            Console.WriteLine("Day " + i + ": In " + city + ", the temperature is " + fahrenheit + "°F");
+        }
+    }
+}
+---
+Task 2 (5 points): classes and methods Create a class called "Student" with the following features: private integer field "_studentName".
+ Public string product "Grade" with get and set accessories.
+ A constructor that takes two parameters for initializing the name and sign (Grade). 
+Create a public method called "Greeting" that returns the message: "Hi, I'm [_studentName] and I'm in grade [Grade]"). 
+Create a "Student" class object with a name and sign (Grade) and call the "Greeting" method.
+---
+using System;
+
+public class Student
+{
+    private int _studentId;
+    public string Grade { get; set; }
+
+    public Student(int studentId, string grade)
+    {
+        _studentId = studentId;
+        Grade = grade;
+    }
+
+    public string Greeting()
+    {
+        return $"Hi, I'm Student {_studentId} and I'm in grade {Grade}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Student myStudent = new Student(123, "A");
+        Console.WriteLine(myStudent.Greeting());
+    }
+}
+---
+Task 3 (5 points): inheritance and method reset
+Create a class called "Figure" with the following: 
+protected double producty "Area." A constructor that initializes "Area" and assigns 0. 
+Create an affiliate class called "Triangle" that inherits "Shape" with the following: 
+two private double field "_base" and "_height" and their name-appropriate products. 
+Restart (Method Overloading) the "CalculateArea()" method in the class "Triangle" version, 
+which takes the base and height parameters and calculates the area accordingly (formula: base * height / 2).
+Create an affiliate class called "Square" that also inherits "Shape" with the following: private double field "_sideLength and name-appropriate property." 
+Restart the "CalculateArea()" method in the "Square" class with a version that takes the square page setting and calculates the area accordingly. 
+Create objects of "Triangle" and "Square" classes with different parameters (base, height or square side) Calculate and print the areas of both triangles and squares
+ using the overloaded "CalculateArea()" methods.
+---
+using System;
+
+// Base class Figure
+class Figure
+{
+    protected internal double Area;
+
+    public Figure()
+    {
+        Area = 0;
+    }
+}
+
+// Triangle class inheriting Figure
+class Triangle : Figure
+{
+    private double _base;
+    private double _height;
+
+    public Triangle(double baseLength, double height)
+    {
+        _base = baseLength;
+        _height = height;
+    }
+
+    // Overloading CalculateArea method for Triangle
+    public void CalculateArea(double baseLength, double height)
+    {
+        Area = 0.5 * baseLength * height;
+    }
+}
+
+// Square class inheriting Figure
+class Square : Figure
+{
+    private double _sideLength;
+
+    public Square(double sideLength)
+    {
+        _sideLength = sideLength;
+    }
+
+    // Overloading CalculateArea method for Square
+    public void CalculateArea(double sideLength)
+    {
+        Area = sideLength * sideLength;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Creating objects of Triangle and Square classes
+        Triangle triangle = new Triangle(5, 3);
+        Square square = new Square(4);
+
+        // Calculating areas using the overloaded CalculateArea methods
+        triangle.CalculateArea(5, 3);
+        square.CalculateArea(4);
+
+        // Printing the areas of Triangle and Square
+        Console.WriteLine("Area of Triangle: " + triangle.Area);
+        Console.WriteLine("Area of Square: " + square.Area);
+    }
+}
+
+---
+Task 4 (5 points): abstract classes and interfaces
+Create an abstract class "Animal" with the following members:
+ Abstract method "MakeSound()" without implementation. 
+Create an "Animal" class successor class "Dog" that provides the implementation of "MakeSound()" in the text:
+"Woof." By returning. Create a class "Cat", which is also a subsidiary of "Animal", 
+and integrates "MakeSound()" and returns the result to "Meow".
+ Create objects of "Dog" and "Cat" classes and call their "MakeSound()" method.
+---
+using System;
+using System.Collections.Generic;
+
+class MyCollection<T>
+{
+    private List<T> items = new List<T>();
+
+    public void AddItem(T item)
+    {
+        items.Add(item);
+    }
+
+    public T GetItem(int index)
+    {
+        if(index >= 0 && index < items.Count)
+        {
+            return items[index];
+        }
+        else
+        {
+            throw new IndexOutOfRangeException("Index is out of range");
+        }
+    }
+
+    // Adding Count property to get the count of items in the collection
+    public int Count
+    {
+        get { return items.Count; }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        MyCollection<string> myStrings = new MyCollection<string>();
+
+        myStrings.AddItem("Apple");
+        myStrings.AddItem("Banana");
+        myStrings.AddItem("Cherry");
+
+        int indexToRemove = 1;
+        try
+        {
+            string removedItem = myStrings.GetItem(indexToRemove);
+            Console.WriteLine($"Removed item at index {indexToRemove}: {removedItem}");
+
+            // Output the remaining items
+            for (int i = 0; i < myStrings.Count; i++)
+            {
+                Console.WriteLine($"Item {i}: {myStrings.GetItem(i)}");
+            }
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}
+
+---
